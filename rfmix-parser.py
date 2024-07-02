@@ -44,9 +44,9 @@ def parse_region(chm: str, spos: int, epos: int, msp: pd.DataFrame, pop_map: pd.
     if chm not in msp['#chm'].values:
         raise ValueError(f"Chromosome {chm} not found in RFMix output. This could be a 'chr' prefix issue.")
     mask_chr = msp['#chm'] == chm
-    mask1 = mask_chr & (msp['spos'] < spos) & (msp['epos'] > epos)
+    mask1 = mask_chr & (msp['spos'] < spos) & (msp['epos'] > spos)
     mask2 = mask_chr & (msp['spos'] > spos) & (msp['epos'] < epos)
-    mask3 = mask_chr & (msp['spos'] < spos) & (msp['epos'] > epos)
+    mask3 = mask_chr & (msp['spos'] < epos) & (msp['epos'] > epos)
     mask4 = mask_chr & (msp['spos'] < spos) & (msp['epos'] > epos)
     mask = mask1 | mask2 | mask3 | mask4
     msp.loc[mask1, 'spos'] = spos
