@@ -118,7 +118,7 @@ def get_marker_ancestry(markers: list, msp: pd.DataFrame, pop_map: pd.DataFrame)
         ancestry = msp[mask].iloc[:, 6:].replace(pop_map.set_index('NUM')['POP'].to_dict())
         ancestry.insert(0, 'MARKERS', marker)
         ids = ancestry.columns[1:].str.split('.').str[0].unique().tolist()
-        res = pd.wide_to_long(ancestry, ids, i="MARKERS", j="suffix_key", suffix='.*').reset_index().drop('suffix_key',
+        res = pd.wide_to_long(ancestry, ids, i="MARKERS", j="suffix_key", suffix='.(0|1)').reset_index().drop('suffix_key',
                                                                                                           axis=1)
         res = res.groupby('MARKERS').agg(lambda x: '|'.join(x)).reset_index()
         marker_ancestry_df = pd.concat([marker_ancestry_df, res])
