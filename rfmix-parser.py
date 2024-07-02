@@ -141,7 +141,7 @@ def main():
     args = parser()
     pop_map = get_population_mapping(args.mspFile)
     msp = read_msp(args.mspFile)
-    region = args.regions.split(',')
+    region = args.region.split(',')
     if len(region) != 3:
         raise ValueError('Region must contain exactly three entries and be in format CHR,SPOS,EPOS')
     chm = region[0]
