@@ -12,7 +12,7 @@ from pysam import bcftools
 def parser():
     parser = argparse.ArgumentParser(description='Parse RFMix output')
     parser.add_argument('-f', '--mspFile', required=True, help='Path to RFMix .msp.tsv output file')
-    parser.add_argument('-r', '--regions', required=True,
+    parser.add_argument('-r', '--region', required=True,
                         help='List with region to parse, comma-separated with CHR,SPOS,EPOS')
     parser.add_argument('-m', '--markers', required=False,
                         help='List with markers to append to output, providing genotype and ancestry, comma-separated in format chr:pos')
