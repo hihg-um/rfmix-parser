@@ -2,11 +2,11 @@
 # SPDX-License-Identifier: GPL-3.0
 # Kyle M. Scott - kms309@miami.edu
 
-import pandas as pd
 import argparse
-from pysam import bcftools
 import io
-import os
+
+import pandas as pd
+from pysam import bcftools
 
 
 def parser():
@@ -118,7 +118,8 @@ def get_marker_ancestry(markers: list, msp: pd.DataFrame, pop_map: pd.DataFrame)
         ancestry = msp[mask].iloc[:, 6:].replace(pop_map.set_index('NUM')['POP'].to_dict())
         ancestry.insert(0, 'MARKERS', marker)
         ids = ancestry.columns[1:].str.split('.').str[0].unique().tolist()
-        res = pd.wide_to_long(ancestry, ids, i="MARKERS", j="suffix_key", suffix='.*').reset_index().drop('suffix_key', axis=1)
+        res = pd.wide_to_long(ancestry, ids, i="MARKERS", j="suffix_key", suffix='.*').reset_index().drop('suffix_key',
+                                                                                                          axis=1)
         res = res.groupby('MARKERS').agg(lambda x: '|'.join(x)).reset_index()
         marker_ancestry_df = pd.concat([marker_ancestry_df, res])
     if len(marker_ancestry_df) > 1:
@@ -134,6 +135,7 @@ def transpose_marker_results(vcf_df: pd.DataFrame, marker_df: pd.DataFrame) -> p
     marker_df = marker_df.set_index('MARKERS').reset_index()
     marker_df = marker_df.melt(id_vars='MARKERS', var_name='ID', value_name='MARKER_ANCESTRY')
     return pd.merge(vcf_df, marker_df, on=['MARKERS', 'ID'])
+
 
 def main():
     args = parser()
