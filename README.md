@@ -3,7 +3,7 @@
 ### Usage
 
 ```
-usage: rfmix-parser.py [-h] -f MSPFILE -r REGIONS [-m MARKERS] [-v VCF] -o OUT
+usage: rfmix-parser.py [-h] -f MSPFILE -r REGION [-m MARKERS] [-v VCF] -o OUT
 
 Parse RFMix output
 
@@ -11,7 +11,7 @@ options:
   -h, --help            show this help message and exit
   -f MSPFILE, --mspFile MSPFILE
                         Path to RFMix .msp.tsv output file
-  -r REGIONS, --regions REGIONS
+  -r REGION, --region REGION
                         List with region to parse, comma-separated with CHR,SPOS,EPOS
   -m MARKERS, --markers MARKERS
                         List with markers to append to output, providing genotype and ancestry, comma-separated in format chr:pos
